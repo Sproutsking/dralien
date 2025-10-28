@@ -327,10 +327,12 @@
             grid-template-columns: 1fr 1fr;
             gap: 60px;
             align-items: center;
+            position: relative;
         }
 
         .hero-text {
             z-index: 10;
+            position: relative;
         }
 
         .hero-badge {
@@ -490,25 +492,31 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 600px;
+            padding-top: 0;
         }
 
         .alien-showcase {
             position: relative;
-            width: 450px;
-            height: 450px;
+            width: 100%;
+            max-width: 600px;
+            height: 600px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
         .alien-main {
-            font-size: 280px;
-            animation: floatAlien 4s ease-in-out infinite;
-            filter: drop-shadow(0 0 60px var(--primary));
-            position: relative;
-            z-index: 2;
+            font-size: 180px;
+            animation: floatAlien 6s ease-in-out infinite;
+            filter: drop-shadow(0 0 60px var(--primary)) drop-shadow(0 0 100px var(--secondary));
+            position: absolute;
+            z-index: 10;
             cursor: pointer;
             transition: transform 0.3s;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .alien-main:hover {
@@ -516,51 +524,281 @@
         }
 
         @keyframes floatAlien {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(5deg); }
+            0%, 100% { 
+                transform: translate(-50%, -50%) translateY(0) rotate(0deg); 
+                filter: drop-shadow(0 0 60px var(--primary)) drop-shadow(0 0 100px var(--secondary));
+            }
+            50% { 
+                transform: translate(-50%, -50%) translateY(-30px) rotate(5deg); 
+                filter: drop-shadow(0 0 80px var(--secondary)) drop-shadow(0 0 120px var(--accent));
+            }
+        }
+
+        /* ENHANCED ORBITAL SYSTEM */
+        .orbit-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .orbit-ring {
             position: absolute;
-            border: 2px solid rgba(0, 255, 136, 0.3);
             border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Primary Orbit Ring - Solid with gradient */
+        .orbit-ring-1 {
+            width: 350px;
+            height: 350px;
+            border: 3px solid transparent;
+            background: linear-gradient(var(--darker), var(--darker)) padding-box,
+                        linear-gradient(135deg, var(--primary), var(--secondary)) border-box;
             animation: rotate 20s linear infinite;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.4),
+                        inset 0 0 30px rgba(0, 255, 136, 0.2);
         }
 
-        .orbit-ring:nth-child(1) {
-            width: 380px;
-            height: 380px;
-            animation-duration: 15s;
+        /* Secondary Orbit Ring - Dashed with glow */
+        .orbit-ring-2 {
+            width: 450px;
+            height: 450px;
+            border: 2px dashed var(--secondary);
+            animation: rotate 30s linear infinite reverse;
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
+            opacity: 0.7;
         }
 
-        .orbit-ring:nth-child(2) {
-            width: 480px;
-            height: 480px;
-            animation-duration: 25s;
-            animation-direction: reverse;
+        /* Tertiary Orbit Ring - Dotted pattern */
+        .orbit-ring-3 {
+            width: 550px;
+            height: 550px;
+            border: 2px dotted var(--accent);
+            animation: rotate 40s linear infinite;
+            box-shadow: 0 0 50px rgba(255, 0, 255, 0.4);
+            opacity: 0.6;
         }
 
-        .orbit-ring:nth-child(3) {
-            width: 580px;
-            height: 580px;
-            animation-duration: 35s;
+        /* Outer Orbit Ring - Double border effect */
+        .orbit-ring-4 {
+            width: 650px;
+            height: 650px;
+            border: 1px solid var(--primary);
+            animation: rotate 50s linear infinite reverse;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3),
+                        0 0 60px rgba(0, 255, 136, 0.2);
+            opacity: 0.5;
+        }
+
+        /* Particle trail ring */
+        .orbit-ring-5 {
+            width: 280px;
+            height: 280px;
+            border: 2px solid transparent;
+            border-top-color: var(--secondary);
+            border-right-color: var(--accent);
+            animation: rotate 15s linear infinite;
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.6);
         }
 
         @keyframes rotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Orbital Dots/Particles */
+        .orbit-dot {
+            position: absolute;
+            border-radius: 50%;
+            box-shadow: 0 0 20px currentColor;
+        }
+
+        .orbit-dot-1 {
+            width: 14px;
+            height: 14px;
+            background: var(--primary);
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .orbit-dot-2 {
+            width: 10px;
+            height: 10px;
+            background: var(--secondary);
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            animation: pulse 2.5s ease-in-out infinite;
+        }
+
+        .orbit-dot-3 {
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .orbit-dot-4 {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            animation: pulse 2.2s ease-in-out infinite;
+        }
+
+        /* Connection Lines */
+        .orbit-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            top: 50%;
+            left: 50%;
+            transform-origin: left center;
+            animation: rotateLine 25s linear infinite;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .orbit-line-1 {
+            width: 175px;
+            animation-duration: 20s;
+        }
+
+        .orbit-line-2 {
+            width: 225px;
+            animation-duration: 30s;
+            animation-direction: reverse;
+            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+            box-shadow: 0 0 10px var(--secondary);
+        }
+
+        @keyframes rotateLine {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
-        .orbit-dot {
+        /* Energy Pulses */
+        .energy-pulse {
             position: absolute;
-            width: 12px;
-            height: 12px;
-            background: var(--secondary);
             border-radius: 50%;
-            box-shadow: 0 0 20px var(--secondary);
-            top: 0;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
+            animation: energyPulse 3s ease-out infinite;
+        }
+
+        .energy-pulse-1 {
+            width: 300px;
+            height: 300px;
+            border: 2px solid var(--primary);
+            animation-delay: 0s;
+        }
+
+        .energy-pulse-2 {
+            width: 300px;
+            height: 300px;
+            border: 2px solid var(--secondary);
+            animation-delay: 1s;
+        }
+
+        .energy-pulse-3 {
+            width: 300px;
+            height: 300px;
+            border: 2px solid var(--accent);
+            animation-delay: 2s;
+        }
+
+        @keyframes energyPulse {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(2);
+                opacity: 0;
+            }
+        }
+
+        /* Floating Particles */
+        .orbit-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .orbit-particle:nth-child(1) {
+            top: 20%;
+            left: 15%;
+            animation: floatParticle 8s ease-in-out infinite;
+        }
+
+        .orbit-particle:nth-child(2) {
+            top: 70%;
+            left: 80%;
+            animation: floatParticle 10s ease-in-out infinite reverse;
+            background: var(--secondary);
+            box-shadow: 0 0 10px var(--secondary);
+        }
+
+        .orbit-particle:nth-child(3) {
+            top: 40%;
+            right: 10%;
+            animation: floatParticle 12s ease-in-out infinite;
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        .orbit-particle:nth-child(4) {
+            bottom: 30%;
+            left: 20%;
+            animation: floatParticle 9s ease-in-out infinite reverse;
+        }
+
+        @keyframes floatParticle {
+            0%, 100% {
+                transform: translate(0, 0);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translate(30px, -30px);
+                opacity: 1;
+            }
+        }
+
+
+        /* Hexagon Grid Overlay */
+        .hex-grid {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.15;
+        }
+
+        .hex-item {
+            position: absolute;
+            width: 60px;
+            height: 70px;
+            stroke: var(--primary);
+            stroke-width: 1;
+            fill: none;
+            filter: drop-shadow(0 0 5px var(--primary));
         }
 
         .hero-countdown {
@@ -1329,23 +1567,43 @@
             50% { transform: rotate(360deg) scale(1.2); }
         }
 
+        /* RESPONSIVE DESIGN */
         @media (max-width: 1200px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                gap: 50px;
-            }
 
             .hero-visual {
                 order: -1;
+                min-height: 400px;
             }
 
             .alien-showcase {
-                width: 380px;
-                height: 380px;
+                height: 500px;
             }
 
             .alien-main {
-                font-size: 220px;
+                font-size: 140px;
+            }
+
+            .orbit-container {
+              margin-top: 0;
+              margin-bottom: 160px;
+            }
+            .orbit-ring-1 { width: 300px; height: 300px; }
+            .orbit-ring-2 { width: 380px; height: 380px; }
+            .orbit-ring-3 { width: 460px; height: 460px; }
+            .orbit-ring-4 { width: 540px; height: 540px; }
+            .orbit-ring-5 { width: 240px; height: 240px; }
+
+            .orbit-line-1 { width: 160px; }
+            .orbit-line-2 { width: 200px; }
+
+            .hex-grid {
+                width: 320px;
+                height: 320px;
+            }
+
+            .energy-pulse {
+                width: 300px !important;
+                height: 300px !important;
             }
 
             .features-grid {
@@ -1362,8 +1620,21 @@
         }
 
         @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            nav .cta-button {
+                display: none;
+            }
+
             .hero {
-                padding: 100px 5% 50px;
+              margin: 0;
+                padding: 0px 5% 50px 10%;
             }
 
             .hero-text h1 {
@@ -1374,27 +1645,35 @@
                 font-size: 16px;
             }
 
-            .hero-stat-value {
-                font-size: 28px;
+            .hero-visual {
+                min-height: 300px;
             }
+
+            .alien-showcase {
+                display: flex;
+                height: 300px;
+            }
+
+            .alien-main {
+                font-size: 120px;
+            }
+            .orbit-container {
+              display: flex;
+            }
+
+            .orbit-ring-1 { width: 260px; height: 260px; }
+            .orbit-ring-2 { width: 330px; height: 330px; }
+            .orbit-ring-3 { width: 400px; height: 400px; }
+            .orbit-ring-4 { width: 470px; height: 470px; }
+            .orbit-ring-5 { width: 210px; height: 210px; }
 
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 15px;
             }
 
-            .section-title {
-                font-size: 36px;
-            }
-
             .features-grid {
                 grid-template-columns: 1fr;
-                gap: 25px;
-            }
-
-            .auction-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                gap: 15px;
             }
 
             .team-grid {
@@ -1403,6 +1682,10 @@
         }
 
         @media (max-width: 640px) {
+            .hero-content {
+                display: flex;
+                flex-direction: column;
+            }
             .ticker-item {
                 font-size: 11px;
                 padding: 0 18px;
@@ -1420,437 +1703,9 @@
                 padding: 12px 5%;
             }
 
-            .hero-text h1 {
-                font-size: 36px;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-            }
-
-            .btn-primary, .btn-secondary {
-                width: 70%;
-                padding: 14px 32px;
-                font-size: 15px;
-            }
-
-            .alien-showcase {
-                width: 300px;
-                height: 300px;
-            }
-
-            .alien-main {
-                font-size: 180px;
-            }
-
-            .orbit-ring {
-                display: none;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stat-card {
-                padding: 25px 20px;
-            }
-
-            .hero-countdown {
-                gap: 12px;
-            }
-
-            .countdown-box {
-                min-width: 75px;
-                padding: 12px 15px;
-            }
-
-            .countdown-box-value {
-                font-size: 28px;
-            }
-
-            .section-title {
-                font-size: 32px;
-            }
-
-            .section-subtitle {
-                font-size: 16px;
-            }
-
-            .wallet-container {
-                padding: 35px 25px;
-            }
-
-            .wallet-input-group {
-                flex-direction: column;
-            }
-
-            .scroll-btn {
-                right: 20px;
-                width: 50px;
-                height: 50px;
-            }
-
-            .scroll-top-btn {
-                bottom: 90px;
-            }
-        }
-        .cosmic-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-        }
-
-        .stars-layer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 4s infinite ease-in-out;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-
-        .alien-particle {
-            position: fixed;
-            font-size: 24px;
-            opacity: 0;
-            animation: alienFloat 8s linear infinite;
-            pointer-events: none;
-            z-index: 1;
-            filter: drop-shadow(0 0 10px var(--primary));
-        }
-
-        @keyframes alienFloat {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.6;
-            }
-            90% {
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            backdrop-filter: blur(20px);
-            background: rgba(10, 14, 39, 0.8);
-            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
-        }
-
-        .ticker-wrapper {
-            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent), var(--primary));
-            background-size: 200% 100%;
-            animation: gradientFlow 3s linear infinite;
-            padding: 6px 0;
-            overflow: hidden;
-        }
-
-        @keyframes gradientFlow {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
-        }
-
-        .ticker {
-            display: flex;
-            animation: scroll 30s linear infinite;
-            white-space: nowrap;
-        }
-
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        .ticker-item {
-            display: inline-flex;
-            align-items: center;
-            padding: 0 30px;
-            color: var(--darker);
-            font-weight: 600;
-            font-size: 13px;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .ticker-item span {
-            margin: 0 6px;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 24px;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
-        }
-
-        .logo-icon {
-            font-size: 32px;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 35px;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 15px;
-            position: relative;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .cta-button {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border: none;
-            padding: 10px 28px;
-            border-radius: 50px;
-            color: var(--darker);
-            font-weight: 700;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.5);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            z-index: 1001;
-        }
-
-        .mobile-menu-btn span {
-            width: 25px;
-            height: 2.5px;
-            background: var(--primary);
-            border-radius: 3px;
-            transition: all 0.3s;
-        }
-
-        .mobile-menu-btn.active span:nth-child(1) {
-            transform: rotate(45deg) translate(6px, 6px);
-        }
-
-        .mobile-menu-btn.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .mobile-menu-btn.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(5, 7, 20, 0.98);
-            backdrop-filter: blur(20px);
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 35px;
-            z-index: 999;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .mobile-menu.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .mobile-menu a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 28px;
-            font-weight: 700;
-            font-family: 'Orbitron', sans-serif;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s;
-        }
-
-        .mobile-menu.active a {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .mobile-menu a:nth-child(1) { transition-delay: 0.1s; }
-        .mobile-menu a:nth-child(2) { transition-delay: 0.2s; }
-        .mobile-menu a:nth-child(3) { transition-delay: 0.3s; }
-        .mobile-menu a:nth-child(4) { transition-delay: 0.4s; }
-        .mobile-menu a:nth-child(5) { transition-delay: 0.5s; }
-        .mobile-menu a:nth-child(6) { transition-delay: 0.6s; }
-
-        .mobile-menu a:hover {
-            color: var(--primary);
-            transform: scale(1.1);
-        }
-
-        .mobile-menu .cta-button {
-            margin-top: 20px;
-            padding: 14px 40px;
-            font-size: 16px;
-        }
-
-        @media (max-width: 1200px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                gap: 50px;
-            }
-
-            .hero-visual {
-                order: -1;
-            }
-
-            .alien-showcase {
-                width: 380px;
-                height: 380px;
-            }
-
-            .alien-main {
-                font-size: 220px;
-            }
-        }
-
-        @media (max-width: 968px) {
-            .nav-links {
-                display: none;
-                margin-top: 25px;
-            }
-
-            .mobile-menu-btn {
-                display: flex;
-            }
-
-            nav .cta-button {
-                display: none;
-            }
-
             .hero {
-                padding: 100px 5% 50px;
-            }
-
-            .hero-text h1 {
-                font-size: 42px;
-            }
-
-            .hero-text p {
-                font-size: 16px;
-            }
-
-            .hero-stat-value {
-                font-size: 28px;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .ticker-item {
-                font-size: 11px;
-                padding: 0 18px;
-            }
-
-            .logo {
-                font-size: 18px;
-            }
-
-            .logo-icon {
-                font-size: 24px;
-            }
-
-            nav {
-                padding: 6px 5%;
-            }
-
-            .hero {
-                min-height: auto;
-                padding: 90px 5% 30px;
+              margin: 0;
+                padding: 0% 5% 15% 5%;
             }
 
             .hero-content {
@@ -1859,20 +1714,66 @@
 
             .hero-visual {
                 order: -1;
-                margin-bottom: -10px;
+                min-height: 200px;
+                margin-bottom: 0;
             }
 
             .alien-showcase {
-                width: 180px;
-                height: 180px;
+                height: 200px;
+                max-width: 200px;
             }
 
             .alien-main {
-                font-size: 100px;
+                font-size: 90px;
             }
 
-            .orbit-ring {
+            /* Simplified orbit rings for mobile */
+            .orbit-ring-1 { 
+                width: 200px; 
+                height: 200px;
+                border-width: 2px;
+            }
+            .orbit-ring-2 { 
+                width: 260px; 
+                height: 260px;
+                border-width: 2px;
+            }
+            .orbit-ring-3 { 
+                width: 320px; 
+                height: 320px;
+                border-width: 1px;
+                opacity: 0.4;
+            }
+            .orbit-ring-4 { 
                 display: none;
+            }
+            .orbit-ring-5 { 
+                width: 160px; 
+                height: 160px;
+                border-width: 2px;
+            }
+
+            .orbit-line {
+                display: none;
+            }
+
+            .hex-grid {
+                display: none;
+            }
+
+            .energy-pulse {
+                width: 200px !important;
+                height: 200px !important;
+            }
+
+            .orbit-particle {
+                width: 3px;
+                height: 3px;
+            }
+
+            .orbit-dot {
+                width: 8px !important;
+                height: 8px !important;
             }
 
             .hero-text {
@@ -1966,7 +1867,7 @@
             }
 
             .btn-primary, .btn-secondary {
-                width: 60%;
+                width: 70%;
                 padding: 13px 28px;
                 font-size: 14px;
             }
@@ -1992,49 +1893,63 @@
             .stat-label {
                 font-size: 12px;
             }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .section-subtitle {
+                font-size: 16px;
+            }
+
+            .auction-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+            }
+
+            .wallet-container {
+                padding: 35px 25px;
+            }
+
+            .wallet-input-group {
+                flex-direction: column;
+            }
+
+            .scroll-btn {
+                right: 20px;
+                width: 50px;
+                height: 50px;
+            }
+
+            .scroll-top-btn {
+                bottom: 90px;
+            }
         }
 
-        .orbit-ring {
-            position: absolute;
-            border: 2px solid rgba(0, 255, 136, 0.3);
-            border-radius: 50%;
-            animation: rotate 20s linear infinite;
-        }
+        @media (max-width: 480px) {
+            .alien-showcase {
+                height: 300px;
+                max-width: 300px;
+            }
 
-        .orbit-ring:nth-child(1) {
-            width: 380px;
-            height: 380px;
-            animation-duration: 15s;
-        }
+            .alien-main {
+                font-size: 75px;
+            }
 
-        .orbit-ring:nth-child(2) {
-            width: 480px;
-            height: 480px;
-            animation-duration: 25s;
-            animation-direction: reverse;
-        }
+            .orbit-ring-1 { width: 170px; height: 170px; }
+            .orbit-ring-2 { width: 220px; height: 220px; }
+            .orbit-ring-3 { width: 270px; height: 270px; }
+            .orbit-ring-5 { width: 140px; height: 140px; }
 
-        .orbit-ring:nth-child(3) {
-            width: 580px;
-            height: 580px;
-            animation-duration: 35s;
-        }
+            .energy-pulse {
+                width: 170px !important;
+                height: 170px !important;
+            }
 
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .orbit-dot {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background: var(--secondary);
-            border-radius: 50%;
-            box-shadow: 0 0 20px var(--secondary);
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
+            .orbit-dot {
+                width: 6px !important;
+                height: 6px !important;
+            }
         }
     </style>
 </head>
@@ -2151,17 +2066,55 @@
                     <button class="btn-secondary" onclick="window.open('https://drip.haus/draliens', '_blank')">View Collection</button>
                 </div>
             </div>
+            
             <div class="hero-visual">
                 <div class="alien-showcase">
-                    <div class="orbit-ring">
-                        <div class="orbit-dot"></div>
+                    <!-- Enhanced Orbital System -->
+                    <div class="orbit-container">
+                        <!-- Energy Pulses -->
+                        <div class="energy-pulse energy-pulse-1"></div>
+                        <div class="energy-pulse energy-pulse-2"></div>
+                        <div class="energy-pulse energy-pulse-3"></div>
+
+                        <!-- Orbit Rings -->
+                        <div class="orbit-ring orbit-ring-1">
+                            <div class="orbit-dot orbit-dot-1"></div>
+                        </div>
+                        
+                        <div class="orbit-ring orbit-ring-2">
+                            <div class="orbit-dot orbit-dot-2"></div>
+                        </div>
+                        
+                        <div class="orbit-ring orbit-ring-3">
+                            <div class="orbit-dot orbit-dot-3"></div>
+                        </div>
+                        
+                        <div class="orbit-ring orbit-ring-4">
+                            <div class="orbit-dot orbit-dot-4"></div>
+                        </div>
+                        
+                        <div class="orbit-ring orbit-ring-5"></div>
+
+                        <!-- Connection Lines -->
+                        <div class="orbit-line orbit-line-1"></div>
+                        <div class="orbit-line orbit-line-2"></div>
+
+                        <!-- Floating Particles -->
+                        <div class="orbit-particle"></div>
+                        <div class="orbit-particle"></div>
+                        <div class="orbit-particle"></div>
+                        <div class="orbit-particle"></div>
+
+                        <!-- Hexagon Grid -->
+                        <svg class="hex-grid">
+                            <polygon class="hex-item" points="30,5 55,20 55,50 30,65 5,50 5,20" style="transform: translate(0, 0)"/>
+                            <polygon class="hex-item" points="30,5 55,20 55,50 30,65 5,50 5,20" style="transform: translate(60px, 35px)"/>
+                            <polygon class="hex-item" points="30,5 55,20 55,50 30,65 5,50 5,20" style="transform: translate(60px, -35px)"/>
+                            <polygon class="hex-item" points="30,5 55,20 55,50 30,65 5,50 5,20" style="transform: translate(120px, 0)"/>
+                        </svg>
                     </div>
-                    <div class="orbit-ring">
-                        <div class="orbit-dot"></div>
-                    </div>
-                    <div class="orbit-ring">
-                        <div class="orbit-dot"></div>
-                    </div>
+
+                    <!-- Main Alien -->
                     <div class="alien-main">👽</div>
                 </div>
             </div>
@@ -2401,13 +2354,11 @@
     </button>
 
     <script>
-        // WHITELIST WALLETS - ADD NEW WALLETS HERE
+        // WHITELIST WALLETS
         const whitelistedWallets = [
             '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb1',
             '0x5aAeb6053F3E94C9b9A09f33669435E7Ef1BeAed',
             '0xfB6916095ca1df60bB79Ce92cE3Ea74c37c5d359',
-            // Add more wallet addresses here, one per line
-            // Format: '0x...',
         ];
 
         window.addEventListener('load', () => {
@@ -2416,6 +2367,7 @@
             }, 1500);
         });
 
+        // Create stars
         const starsLayer = document.getElementById('starsLayer');
         for (let i = 0; i < 300; i++) {
             const star = document.createElement('div');
@@ -2430,6 +2382,7 @@
             starsLayer.appendChild(star);
         }
 
+        // Create floating alien particles
         function createAlienParticle() {
             const particle = document.createElement('div');
             particle.className = 'alien-particle';
@@ -2446,6 +2399,7 @@
 
         setInterval(createAlienParticle, 3000);
 
+        // Mobile menu
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
 
@@ -2461,6 +2415,7 @@
             document.body.style.overflow = '';
         }
 
+        // Countdown timer
         const mintDate = new Date('2025-12-30T00:00:00').getTime();
 
         function updateCountdown() {
@@ -2488,6 +2443,7 @@
         updateCountdown();
         setInterval(updateCountdown, 1000);
 
+        // Generate auction cards
         const auctionGrid = document.getElementById('auctionGrid');
         for (let i = 1; i <= 35; i++) {
             const card = document.createElement('div');
@@ -2504,6 +2460,7 @@
             auctionGrid.appendChild(card);
         }
 
+        // Whitelist checker
         function checkWhitelist() {
             const input = document.getElementById('walletInput');
             const result = document.getElementById('walletResult');
@@ -2531,6 +2488,7 @@
             result.style.display = 'block';
         }
 
+        // FAQ toggle
         function toggleFaq(element) {
             const item = element.parentElement;
             const isActive = item.classList.contains('active');
@@ -2544,6 +2502,7 @@
             }
         }
 
+        // Scroll functions
         function scrollToSection(sectionId) {
             const target = document.getElementById(sectionId);
             if (target) {
@@ -2563,6 +2522,7 @@
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }
 
+        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -2576,6 +2536,7 @@
             });
         });
 
+        // Scroll buttons visibility
         const scrollTopBtn = document.getElementById('scrollTopBtn');
         const scrollDownBtn = document.getElementById('scrollDownBtn');
 
@@ -2596,6 +2557,7 @@
             }
         });
 
+        // Parallax stars effect
         let ticking = false;
         document.addEventListener('scroll', () => {
             if (!ticking) {
@@ -2614,6 +2576,49 @@
             }
         });
 
+        // Animated cosmic background
+        let hue = 0;
+        setInterval(() => {
+            hue = (hue + 1) % 360;
+            document.querySelector('.cosmic-bg').style.background = 
+                `radial-gradient(ellipse at bottom, hsl(${hue}, 40%, 15%) 0%, #090A0F 100%)`;
+        }, 100);
+
+        // Alien click effect
+        document.querySelector('.alien-main').addEventListener('click', function() {
+            this.style.animation = 'none';
+            setTimeout(() => {
+                this.style.animation = 'floatAlien 6s ease-in-out infinite';
+            }, 10);
+
+            for (let i = 0; i < 16; i++) {
+                const particle = document.createElement('div');
+                particle.textContent = '✨';
+                particle.style.position = 'fixed';
+                particle.style.left = '50%';
+                particle.style.top = '50%';
+                particle.style.fontSize = '24px';
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = '9999';
+                
+                const angle = (i / 16) * Math.PI * 2;
+                const distance = 120;
+                const x = Math.cos(angle) * distance;
+                const y = Math.sin(angle) * distance;
+                
+                document.body.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.style.transition = 'all 1s ease-out';
+                    particle.style.transform = `translate(${x}px, ${y}px)`;
+                    particle.style.opacity = '0';
+                }, 10);
+                
+                setTimeout(() => particle.remove(), 1100);
+            }
+        });
+
+        // Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -100px 0px'
@@ -2635,46 +2640,7 @@
             observer.observe(el);
         });
 
-        document.querySelector('.alien-main').addEventListener('click', function() {
-            this.style.animation = 'none';
-            setTimeout(() => {
-                this.style.animation = 'floatAlien 4s ease-in-out infinite';
-            }, 10);
-
-            for (let i = 0; i < 12; i++) {
-                const particle = document.createElement('div');
-                particle.textContent = '✨';
-                particle.style.position = 'fixed';
-                particle.style.left = '50%';
-                particle.style.top = '50%';
-                particle.style.fontSize = '24px';
-                particle.style.pointerEvents = 'none';
-                particle.style.zIndex = '9999';
-                
-                const angle = (i / 12) * Math.PI * 2;
-                const distance = 100;
-                const x = Math.cos(angle) * distance;
-                const y = Math.sin(angle) * distance;
-                
-                document.body.appendChild(particle);
-                
-                setTimeout(() => {
-                    particle.style.transition = 'all 1s ease-out';
-                    particle.style.transform = `translate(${x}px, ${y}px)`;
-                    particle.style.opacity = '0';
-                }, 10);
-                
-                setTimeout(() => particle.remove(), 1000);
-            }
-        });
-
-        let hue = 0;
-        setInterval(() => {
-            hue = (hue + 1) % 360;
-            document.querySelector('.cosmic-bg').style.background = 
-                `radial-gradient(ellipse at bottom, hsl(${hue}, 40%, 15%) 0%, #090A0F 100%)`;
-        }, 100);
-
+        // Random stat card glow effect
         setInterval(() => {
             const statCards = document.querySelectorAll('.stat-card');
             const randomCard = statCards[Math.floor(Math.random() * statCards.length)];
@@ -2687,12 +2653,14 @@
             }, 1000);
         }, 3000);
 
+        // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
                 closeMobileMenu();
             }
         });
 
+        // Ticker hover effect
         const ticker = document.querySelector('.ticker');
         ticker.addEventListener('mouseenter', () => {
             ticker.style.animationDuration = '60s';
@@ -2702,9 +2670,10 @@
             ticker.style.animationDuration = '30s';
         });
 
+        // Performance optimization for low-end devices
         if (navigator.hardwareConcurrency <= 4) {
-            document.querySelectorAll('.orbit-ring').forEach(ring => {
-                ring.style.display = 'none';
+            document.querySelectorAll('.orbit-ring-4, .hex-grid').forEach(el => {
+                el.style.display = 'none';
             });
         }
 
